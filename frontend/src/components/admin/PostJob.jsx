@@ -15,15 +15,15 @@ const companyArray = [];
 const PostJob = () => {
     const {alladminJobs}=useSelector(store=>store.job)
     const [input, setInput] = useState({
-        title: alladminJobs?.title||"",
-        description: alladminJobs?.description ||"",
-        requirements: alladminJobs?.requirements||"",
-        salary: alladminJobs?.salary||"",
-        location:alladminJobs?.location|| "",
-        jobType:alladminJobs?.jobType|| "", 
-        experience:alladminJobs?.experience|| "",
-        position: alladminJobs?.position||0,
-        companyId:alladminJobs?.companyId||"",
+        title: "",
+        description:"",
+        requirements: "",
+        salary: "",
+        location: "",
+        jobType: "", 
+        experience: "",
+        position: 0,
+        companyId:"",
     });
 
     const [loading,setLoading]=useState(false);
@@ -42,19 +42,9 @@ const PostJob = () => {
 
     const submitHandler=async(e)=>{
         e.preventDefault();
-        const formData=new FormData();
-        formData.append("title",input.title);
-        formData.append("description",input.description);
-        formData.append("requirements",input.requirements);
-        formData.append("salary",input.salary);
-        formData.append("location",input.location);
-        formData.append("jobType",input.jobType);
-        formData.append("experience",input.experience);
-        formData.append("position",input.position);
-        formData.append("companyId",input.companyId);
         try {
             setLoading(true);
-            const res=await axios.post(`${JOB_API_END_POINT}/post`,formData,{
+            const res=await axios.post(`${JOB_API_END_POINT}/post`,input,{
                 headers:{
                     'Content-Type':'application/json'
                 },
